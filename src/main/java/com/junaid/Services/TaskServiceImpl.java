@@ -42,7 +42,7 @@ public class TaskServiceImpl implements TaskService {
 		if(taskModel!=null) {
 			taskModel.setTask_id(tm.getTask_id());
 			taskModel.setName(tm.getName());
-			taskModel.setDesc(tm.getDescr());
+			taskModel.setDescr(tm.getDescr());
 		}
 		removeTask(taskid);
 		setTask(taskModel);

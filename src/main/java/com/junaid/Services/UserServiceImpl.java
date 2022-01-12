@@ -1,11 +1,12 @@
 package com.junaid.Services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.junaid.Models.UserAddressModel;
+import com.junaid.Models.TaskModel;
 import com.junaid.Models.UserModel;
 import com.junaid.Repo.UserRepo;
 
@@ -33,8 +34,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserModel getUserbyId(long parseLong) {
-		return userRepo.findById(parseLong).get();
+	public Set<TaskModel> getUserbyId(long parseLong) {
+		return userRepo.findById(parseLong).get().getTasks();
 	}
 
 	@Override
@@ -42,12 +43,8 @@ public class UserServiceImpl implements UserService {
 		um.setUid(Userid);
 		//um.getUserAddressModel().setUid(Userid);
 		setUser(um);
-		return getUserbyId(Userid);
+		return null;//getUserbyId(Userid);
 	}
 
-	@Override
-	public UserAddressModel getUserAddressbyId(long parseLong) {
-		return getUserbyId(parseLong).getUserAddressModel();
-	}
-  
+
 }

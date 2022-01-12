@@ -1,13 +1,15 @@
 package com.junaid.Models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,28 +22,14 @@ public class UserModel {
 	long Uid;
 	
 	@Column
-	String name;
+	String firstname;
 	
-	@OneToOne(cascade = CascadeType.ALL) @MapsId
-	UserAddressModel Address;
+	@Column
+	String lastname;
 
-	public UserModel() {
-		super();
-	}
-
-	public UserModel(String name, UserAddressModel userAddressModel) {
-		super();
-		this.name = name;
-		this.Address = userAddressModel;
-	}
-
-	public UserAddressModel getUserAddressModel() {
-		return Address;
-	}
-
-	public void setUserAddressModel(UserAddressModel userAddressModel) {
-		this.Address = userAddressModel;
-	}
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Uid", referencedColumnName = "Uid")
+	Set<TaskModel> tasks;
 
 	public long getUid() {
 		return Uid;
@@ -51,11 +39,42 @@ public class UserModel {
 		Uid = uid;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Set<TaskModel> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<TaskModel> tasks) {
+		this.tasks = tasks;
+	}
+
+	public UserModel(long uid, String firstname, String lastname, Set<TaskModel> tasks) {
+		super();
+		Uid = uid;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.tasks = tasks;
+	}
+
+	public UserModel() {
+		super();
+	}
+	
+	
+	
 }

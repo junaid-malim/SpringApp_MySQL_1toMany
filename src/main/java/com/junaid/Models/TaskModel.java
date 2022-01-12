@@ -23,6 +23,29 @@ public class TaskModel {
 	
 	@Column
 	String descr;
+	
+	@Column(name = "Uid")
+    private Integer Uid;
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
+
+	public Integer getUid() {
+		return Uid;
+	}
+
+	public void setUid(Integer uid) {
+		Uid = uid;
+	}
+	
+	public TaskModel(long task_id, String name, String descr, Integer uid) {
+		super();
+		this.task_id = task_id;
+		this.name = name;
+		this.descr = descr;
+		Uid = uid;
+	}
 
 	public long getTask_id() {
 		return task_id;
@@ -44,19 +67,8 @@ public class TaskModel {
 		return descr;
 	}
 
-	public void setDesc(String descr) {
-		this.descr = descr;
-	}
-
-	public TaskModel(long task_id, String name, String descr) {
-		super();
-		this.task_id = task_id;
-		this.name = name;
-		this.descr = descr;
-	}
-
 	public TaskModel() {
-
+		super();
 	}
 
 }
