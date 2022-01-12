@@ -27,7 +27,7 @@ public class UserModel {
 	@Column
 	String lastname;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "Uid", referencedColumnName = "Uid")
 	Set<TaskModel> tasks;
 

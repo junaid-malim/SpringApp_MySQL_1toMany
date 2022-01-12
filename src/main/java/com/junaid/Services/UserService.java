@@ -14,8 +14,16 @@ public interface UserService {
 
 	public List<UserModel> removeUser(long i);
 
-	public Set<TaskModel> getUserbyId(long parseLong);
+	public UserModel getUserbyId(long parseLong);
 
 	public UserModel putUser(long userid, UserModel um);
+
+	public Set<TaskModel> getUsertasksbyId(long parseLong);
+
+	public Set<TaskModel> setUsertask(long parseLong,TaskModel um);
+
+	public UserModel putUsertask(Long userid, Long taskid, TaskModel um);
+
+	public UserModel removeUsertask(long parseLong, long parseLong2);
 
 }

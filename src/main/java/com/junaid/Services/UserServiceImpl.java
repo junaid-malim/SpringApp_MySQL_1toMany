@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.junaid.Models.TaskModel;
 import com.junaid.Models.UserModel;
+import com.junaid.Repo.TaskRepo;
 import com.junaid.Repo.UserRepo;
 
 @Service
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepo userRepo;
+	
+	@Autowired
+	private TaskRepo taskRepo;
 
 	@Override
 	public List<UserModel> getUser() {
@@ -34,17 +38,42 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<TaskModel> getUserbyId(long parseLong) {
+	public UserModel getUserbyId(long parseLong) {
+		return userRepo.findById(parseLong).get();
+	}
+	
+	@Override
+	public Set<TaskModel> getUsertasksbyId(long parseLong) {
 		return userRepo.findById(parseLong).get().getTasks();
 	}
-
+	
 	@Override
 	public UserModel putUser(long Userid, UserModel um) {
 		um.setUid(Userid);
-		//um.getUserAddressModel().setUid(Userid);
+		for (TaskModel tm : um.getTasks()) {
+			tm.setUid((int)Userid);
+		}
 		setUser(um);
-		return null;//getUserbyId(Userid);
+		return userRepo.getById(Userid);
 	}
 
+	@Override
+	public Set<TaskModel> setUsertask(long parseLong,TaskModel um) {
+		taskRepo.save(um);
+		return getUsertasksbyId(parseLong);
+	}
+
+	@Override
+	public UserModel putUsertask(Long userid,Long taskid, TaskModel um) {
+		um.setUid(userid.intValue());
+		um.setTask_id(taskid.intValue());
+		taskRepo.save(um);
+		return userRepo.getById(userid);
+	}
+
+	@Override
+	public UserModel removeUsertask(long parseLong, long parseLong2) {
+		return null;
+	}
 
 }

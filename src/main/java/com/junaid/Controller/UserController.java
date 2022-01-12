@@ -22,29 +22,57 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	//done
 	@GetMapping("/api/Users")
 	public List<UserModel> Users(){
 		return userService.getUser();
 	}
 
-	@GetMapping("/api/Users/{Userid}/tasks")
-	public Set<TaskModel> Users(@PathVariable String Userid){
+	//done
+	@GetMapping("/api/Users/{Userid}")
+	public UserModel Users(@PathVariable String Userid){
 		return userService.getUserbyId(Long.parseLong(Userid));
 	}
 
+	//done
+	@GetMapping("/api/Users/{Userid}/tasks")
+	public Set<TaskModel> Userstasks(@PathVariable String Userid){
+		return userService.getUsertasksbyId(Long.parseLong(Userid));
+	}
+	
+	//done
 	@PostMapping("/api/Users")
 	public List<UserModel> addUsers(@RequestBody UserModel um){
 		return userService.setUser(um);
 	}
+	
+	//done-uid injection remaining
+	@PostMapping("/api/Users/{Userid}/tasks")
+	public Set<TaskModel> addUserstask(@PathVariable Long Userid,@RequestBody TaskModel um){
+		return userService.setUsertask(Userid,um);
+	}
 
+	//done
 	@PutMapping("/api/Users/{Userid}")
 	public UserModel putUser(@PathVariable Long Userid,@RequestBody UserModel um){
 		return userService.putUser(Userid,um);
 	}
-
+	
+	
+	@PutMapping("/api/Users/{Userid}/{Taskid}")
+	public UserModel putUsertask(@PathVariable Long Userid,@PathVariable Long Taskid,@RequestBody TaskModel um){
+		return userService.putUsertask(Userid,Taskid,um);
+	}
+	
+	//done
 	@DeleteMapping("/api/Users/{Userid}")
 	public List<UserModel> deleteUser(@PathVariable String Userid){
 		return userService.removeUser(Long.parseLong(Userid));
 	}
 
+	@DeleteMapping("/api/Users/{Userid}/{Taskid}")
+	public UserModel deleteUsertask(@PathVariable String Userid,@PathVariable String Taskid){
+		return userService.removeUsertask(Long.parseLong(Userid),Long.parseLong(Taskid));
+	}
+	
 }
