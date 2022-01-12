@@ -2,6 +2,8 @@ package com.junaid.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ public class TaskModel {
 	}
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "task_id", unique = true)
 	long task_id;
 	

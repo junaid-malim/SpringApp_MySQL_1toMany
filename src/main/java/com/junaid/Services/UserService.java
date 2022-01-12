@@ -24,6 +24,6 @@ public interface UserService {
 
 	public UserModel putUsertask(Long userid, Long taskid, TaskModel um);
 
-	public UserModel removeUsertask(long parseLong, long parseLong2);
+	public UserModel removeUsertask(long userid, long taskid);
 
 }

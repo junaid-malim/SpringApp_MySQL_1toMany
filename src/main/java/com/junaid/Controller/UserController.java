@@ -58,7 +58,7 @@ public class UserController {
 		return userService.putUser(Userid,um);
 	}
 	
-	
+	//done
 	@PutMapping("/api/Users/{Userid}/{Taskid}")
 	public UserModel putUsertask(@PathVariable Long Userid,@PathVariable Long Taskid,@RequestBody TaskModel um){
 		return userService.putUsertask(Userid,Taskid,um);
@@ -70,6 +70,7 @@ public class UserController {
 		return userService.removeUser(Long.parseLong(Userid));
 	}
 
+	//done
 	@DeleteMapping("/api/Users/{Userid}/{Taskid}")
 	public UserModel deleteUsertask(@PathVariable String Userid,@PathVariable String Taskid){
 		return userService.removeUsertask(Long.parseLong(Userid),Long.parseLong(Taskid));

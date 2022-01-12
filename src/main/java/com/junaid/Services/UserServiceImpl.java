@@ -68,12 +68,13 @@ public class UserServiceImpl implements UserService {
 		um.setUid(userid.intValue());
 		um.setTask_id(taskid.intValue());
 		taskRepo.save(um);
-		return userRepo.getById(userid);
+		return userRepo.findById(userid).get();
 	}
 
 	@Override
-	public UserModel removeUsertask(long parseLong, long parseLong2) {
-		return null;
+	public UserModel removeUsertask(long userid, long taskid) {
+		taskRepo.deleteById(taskid);
+		return userRepo.findById(userid).get();
 	}
 
 }
